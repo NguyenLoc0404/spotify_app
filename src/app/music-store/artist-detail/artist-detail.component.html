@@ -1,0 +1,27 @@
+<div class="row" style="margin-top: 2%;justify-content: center;">
+    <div class="col-3"  *ngFor="let item of artistsList; let i=index" style="margin-bottom: 2%;"
+        [ngStyle]="{ display: item.display ? 'block': 'none'}" (click)='viewTopTrack(item,i)'>
+        <img src="{{item.images[1] && item.images[1].url}}" alt="link erro"
+            style="border-radius: 50%;width: 300px;height: 300px;">
+        <h5 style="font-weight: bold;color: #1855ff;margin-top: 2%;margin-bottom: 0;">{{item.name}}</h5>
+        <p style="margin-bottom: 0;font-weight: 600;"> <span
+                style="font-weight: 700;color: red;font-size: 20px;">Popularity: </span>
+            {{item.popularity}}
+        </p>
+ 
+        <p style="margin-bottom: 0;font-weight: 600;"> <span
+                style="font-weight: 700;color: #4caf50;font-size: 20px;">Genres: </span>
+            {{returnGenres(item.genres)}}
+        </p>
+ 
+    </div>
+ 
+    <div *ngIf="artistsList && artistsList.length == 0" style="text-align: center;">
+        <h5 style="color: red;">No Data For Your Search.Pls Search Again</h5>
+    </div>
+ 
+</div>
+ 
+<div *ngIf="artistsList && artistsList.length > 0">
+    <app-track-detail [topTrack]="topTrack"></app-track-detail>
+</div>

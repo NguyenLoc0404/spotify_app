@@ -1,0 +1,23 @@
+<div  class="container" style="text-align: center">
+    <h4>Music Store</h4>
+    <div class="row">
+        <div class="col-3"></div>
+        <input [(ngModel)]="keyword" type="text" class="col-6" placeholder="Input Your Artist" aria-label="keyword"
+            aria-describedby="basic-addon1" />
+        <div class="col-2" style="text-align: left;">
+            <button  [disabled]="!accessToken"  type="button" class="btn btn-success" (click)="searchArtist()">Search</button>
+            <button *ngIf="!accessToken || tokenExprise"   type="button" class="btn btn-warning" (click)="getNewToken()" style="margin-left: 3%;">Get Token</button>
+        </div>
+    </div>
+    <div *ngIf="!accessToken" style="text-align: center;margin-top: 2%;">
+        <p style="color: red;">
+            Dont have Token. Pls click Get Token
+        </p>
+    </div>
+    <div *ngIf="tokenExprise" style="text-align: center;margin-top: 2%;">
+        <p style="color: red;">
+            The token expired. Pls click Get Token
+        </p>
+    </div>
+    <app-artist-detail *ngIf="!tokenExprise" [artists]="artists" [accessToken]='accessToken' ></app-artist-detail>
+</div>
