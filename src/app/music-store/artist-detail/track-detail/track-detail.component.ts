@@ -8,6 +8,8 @@ import { MusicService } from '../../Service/music-service.service';
 })
 export class TrackDetailComponent implements OnInit {
   @Input() topTrack: any;
+  @Input() artistsList: any;
+  @Input() index: any;
   tracks:any;
   constructor(private musicService: MusicService) { }
  
@@ -15,12 +17,14 @@ export class TrackDetailComponent implements OnInit {
   }
  
   ngOnChanges(changes: SimpleChanges): void {
-    const change = changes['topTrack'].currentValue;
+    const change = changes['topTrack']?.currentValue;
     this.tracks = change;
   }
   backList(){
     this.tracks = [];
-    this.musicService.changeMessage('true');
+    this.artistsList.map((ele: any, index: number) => {
+      ele.display = true;
+    });
   }
  
 }

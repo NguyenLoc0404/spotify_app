@@ -8,12 +8,11 @@ import { MusicService } from '../Service/music-service.service';
 export class ArtistDetailComponent implements OnInit {
   @Input() artists: any;
   @Input() accessToken: any;
-  // @Input() default: any;
   artistsList: any;
   selectArtist: any;
   token: any;
   topTrack: any;
-  // reload: any;
+  indexOfArtist : number = -1;
   constructor(private musicService: MusicService) {}
  
   ngOnInit(): void {}
@@ -33,12 +32,6 @@ export class ArtistDetailComponent implements OnInit {
       this.artistsList.map((ele: { display: boolean; }) => {
         ele.display = true;
       });
- 
-    // if (changes.default && changes.default.currentValue) {
-    //   const default1 = changes.default.currentValue;
-    //   this.reload = default1;
-    //   if (this.reload) this.topTrack = [];
-    // }
   }
  
   returnGenres(input: any[]) {
@@ -48,22 +41,21 @@ export class ArtistDetailComponent implements OnInit {
     });
   }
  
-  async viewTopTrack(item: any, i: any) {
-    item.click = !item.click;
+  async viewTopTrack(item: any, i: number) {
+    this.indexOfArtist = i;
     this.artistsList.map((ele: any, index: number) => {
       if (index != i) {
         ele.display = false;
       } else ele.display = true;
     });
+    
     this.selectArtist = item;
- 
     await this.musicService
       .getTopTracksById(item.id, this.token)
       .subscribe((res: any) => {
         this.topTrack = res.tracks;
       },
       (error) => {
-        console.log('error', error);
         if(error.status = 401){
             alert('123');
         }
