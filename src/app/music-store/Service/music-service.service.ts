@@ -5,26 +5,60 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class MusicService {
-  url = 'https://api.spotify.com/v1/search';
-  type = 'artist';
-  limit = 10;
 
   constructor(private http: HttpClient) {}
 
-  searchArtist(q: string, accessToken: string) {
-    return this.http.get(this.url, {
+  searchMusic(q: string, accessToken: string, type: string) {
+    const url = 'https://api.spotify.com/v1/search';
+    const limit = 10;
+    return this.http.get(url, {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + accessToken,
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       }),
 
       params: {
         q: q,
-        type: this.type,
-        limit: this.limit.toString(),
+        type: type,
+        limit: limit.toString(),
       },
     });
   }
+
+  getCurrentUserPlaylists(accessToken: string){
+    const url = 'https://api.spotify.com/v1/me/playlists';
+    return this.http.get(url,{
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + accessToken,
+        'Content-Type': 'application/json'
+      })
+    })
+  }
+
+  getCurrentTracksInPlaylist(idOfPlaylist: string, accessToken: string) {
+    const url = `https://api.spotify.com/v1/playlists/${idOfPlaylist}/tracks`;
+    return this.http.get(url, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + accessToken,
+        'Content-Type': 'application/json'
+      }),
+
+      params: {
+        playlist_id: idOfPlaylist
+      },
+    });
+  }
+
+  getCurrentTrack(idOfTrack: string,accessToken: string){
+    const url = `https://api.spotify.com/v1/tracks/${idOfTrack}`;
+    return this.http.get(url,{
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + accessToken,
+        'Content-Type': 'application/json'
+      })
+    })
+  }
+  
 
   getTopTracksById(id: string, accessToken: string) {
     return this.http.get(

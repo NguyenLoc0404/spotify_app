@@ -5,7 +5,9 @@
         <input [(ngModel)]="keyword" type="text" class="col-6" placeholder="Input Your Artist" aria-label="keyword"
             aria-describedby="basic-addon1" />
         <div class="col-2" style="text-align: left;">
-            <button  [disabled]="!accessToken"  type="button" class="btn btn-success" (click)="searchArtist()">Search</button>
+            <!-- <button  [disabled]="!accessToken"  type="button" class="btn btn-success" (click)="searchMusic('artist')">Search artist</button> -->
+            <!-- <button  [disabled]="!accessToken"  type="button" class="btn btn-success" (click)="searchMusic('track')">Search track</button> -->
+            <button  [disabled]="!accessToken"  type="button" class="btn btn-success" (click)="getCurrentPlaylist()">getCurrentUserPlaylists</button>
             <button *ngIf="!accessToken || tokenExprise"   type="button" class="btn btn-warning" (click)="getNewToken()" style="margin-left: 3%;">Get Token</button>
         </div>
     </div>
@@ -19,5 +21,6 @@
             The token expired. Pls click Get Token
         </p>
     </div>
-    <app-artist-detail *ngIf="!tokenExprise" [artists]="artists" [accessToken]='accessToken' ></app-artist-detail>
+    <app-artist-detail *ngIf="!tokenExprise" [tracks]="tracks" [artists]="artists" [accessToken]='accessToken' ></app-artist-detail>
+    <app-playlists *ngIf="!tokenExprise" [playlists]="playlists" [accessToken]='accessToken'></app-playlists>
 </div>

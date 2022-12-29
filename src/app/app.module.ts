@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { ArtistDetailComponent } from './music-store/artist-detail/artist-detail.component';
 import { TrackDetailComponent } from './music-store/artist-detail/track-detail/track-detail.component';
 import { MusicStoreComponent } from './music-store/music-store.component';
+import { PlaylistsComponent } from './music-store/playlists/playlists.component';
 @NgModule({
   declarations: [
     AppComponent,
     MusicStoreComponent,
     ArtistDetailComponent,
-    TrackDetailComponent
+    TrackDetailComponent,
+    PlaylistsComponent
   ],
   imports: [
     BrowserModule,

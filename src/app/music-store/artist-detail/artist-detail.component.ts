@@ -7,9 +7,9 @@ import { MusicService } from '../Service/music-service.service';
 })
 export class ArtistDetailComponent implements OnInit {
   @Input() artists: any;
+  @Input() tracks: any;
   @Input() accessToken: any;
   artistsList: any;
-  selectArtist: any;
   token: any;
   topTrack: any;
   indexOfArtist : number = -1;
@@ -22,11 +22,17 @@ export class ArtistDetailComponent implements OnInit {
       const change = changes['artists'].currentValue;
       this.artistsList = change;
     }
- 
+
     if (changes['accessToken'] && changes['accessToken'].currentValue) {
       const token = changes['accessToken'].currentValue;
       this.token = token;
     }
+
+    if (changes['tracks'] && changes['tracks'].currentValue) {
+      const change = changes['tracks'].currentValue;
+      this.topTrack = change;
+    }
+    
  
     if (this.artistsList)
       this.artistsList.map((ele: { display: boolean; }) => {
@@ -49,10 +55,10 @@ export class ArtistDetailComponent implements OnInit {
       } else ele.display = true;
     });
     
-    this.selectArtist = item;
     await this.musicService
       .getTopTracksById(item.id, this.token)
       .subscribe((res: any) => {
+        
         this.topTrack = res.tracks;
       },
       (error) => {

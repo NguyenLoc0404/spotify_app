@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { MusicService } from './Service/music-service.service';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-music-store',
   templateUrl: './music-store.component.html',
@@ -11,6 +12,8 @@ export class MusicStoreComponent implements OnInit {
   accessToken: string = '';
   keyword: string = '';
   artists: any;
+  tracks: any;
+  playlists: any;
   default: boolean = false;
   tokenExprise: boolean = false;
   currentToken: any = sessionStorage.getItem('accessToken');
@@ -20,17 +23,20 @@ export class MusicStoreComponent implements OnInit {
     private musicService: MusicService,
   ) {}
 
-  searchArtist() {
+  searchMusic(type: string) {
     if (this.accessToken && !this.tokenExprise) {
       if (this.keyword.length > 0) {
         this.musicService
-          .searchArtist(this.keyword, this.accessToken)
+          .searchMusic(this.keyword, this.accessToken,type)
           .subscribe(
             (res: any) => {
-              this.artists = res.artists.items;
+              if(type == 'artist')
+                this.artists = res.artists.items;
+              else {
+                this.tracks = res.tracks.items;
+              }  
             },
             (error) => {
-              console.log('error', error);
               if ((error.status = 401)) {
                 this.tokenExprise = true;
               }
@@ -38,6 +44,13 @@ export class MusicStoreComponent implements OnInit {
           );
       }
     }
+  }
+
+  getCurrentPlaylist(){
+    this.musicService.getCurrentUserPlaylists(this.accessToken).subscribe((res:any) => {
+      this.playlists = res.items;
+    })
+
   }
 
   getNewToken() {
@@ -61,4 +74,8 @@ export class MusicStoreComponent implements OnInit {
       });
     }
   }
+}
+
+interface Post {
+  content: string;
 }

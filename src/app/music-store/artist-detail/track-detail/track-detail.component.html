@@ -1,5 +1,5 @@
 <div class="container" >
-    <button *ngIf="tracks && tracks.length > 0" class="btn btn-warning" style="margin-bottom: 2%;" (click)="backList()">Back</button>
+    <button *ngIf="tracks && tracks.length > 0 &&( (artistsList && artistsList.length > 0)||(tracksList && tracksList.length > 0))" class="btn btn-warning" style="margin-bottom: 2%;" (click)="backList()">Back</button>
     <div class="row" *ngFor="let item of tracks">
         <div class="col-3">
  
