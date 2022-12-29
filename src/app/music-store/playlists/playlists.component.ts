@@ -9,6 +9,7 @@ import { MusicService } from '../Service/music-service.service';
 export class PlaylistsComponent {
   @Input() playlists: any;
   @Input() accessToken: any;
+  @Input() clickInformation: any;
   indexOfPlaylist : number = -1;
   playList : any;
   token: any;

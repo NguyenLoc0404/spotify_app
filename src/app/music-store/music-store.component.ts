@@ -17,39 +17,95 @@ export class MusicStoreComponent implements OnInit {
   default: boolean = false;
   tokenExprise: boolean = false;
   currentToken: any = sessionStorage.getItem('accessToken');
+  clickInformation = {
+    isClickSearch: false,
+    isTypeTrack: false,
+    isTypeCurrentList: false
+  };
+  isLoading: boolean = false;
+
+  selectedTypeSearch: string = 'Choose Search Type';
+
+  options = [
+    { name: "Choose Search Type", value: 0 },
+    { name: "track", value: 1 },
+    { name: "artist", value: 2 },
+    { name: "Current User Playlists", value: 3 },
+  ]
   constructor(
     private activeRoute: ActivatedRoute,
     private location: Location,
     private musicService: MusicService,
-  ) {}
+  ) { }
 
-  searchMusic(type: string) {
-    if (this.accessToken && !this.tokenExprise) {
-      if (this.keyword.length > 0) {
-        this.musicService
-          .searchMusic(this.keyword, this.accessToken,type)
-          .subscribe(
-            (res: any) => {
-              if(type == 'artist')
-                this.artists = res.artists.items;
-              else {
-                this.tracks = res.tracks.items;
-              }  
-            },
-            (error) => {
-              if ((error.status = 401)) {
-                this.tokenExprise = true;
+  searchMusic() {
+    this.isLoading = true;
+    this.clickInformation.isClickSearch = true;
+    if (this.selectedTypeSearch === 'Current User Playlists') {
+      this.clickInformation.isTypeCurrentList = true;
+      this.getCurrentPlaylist();
+    } else {
+      if (this.selectedTypeSearch === 'track') {
+        this.clickInformation.isTypeTrack = true;
+      }
+
+      if (this.accessToken && !this.tokenExprise) {
+        if (this.keyword.length > 0) {
+          this.musicService
+            .searchMusic(
+              this.keyword,
+              this.accessToken,
+              this.selectedTypeSearch
+            )
+            .subscribe(
+              (res: any) => {
+                this.isLoading = false;
+                if (this.selectedTypeSearch == 'artist')
+                  this.artists = res.artists.items;
+                else {
+                  this.tracks = res.tracks.items;
+                }
+              },
+              (error) => {
+                this.isLoading = false;
+                if ((error.status = 401)) {
+                  this.tokenExprise = true;
+                }
               }
-            }
-          );
+            );
+        }
       }
     }
   }
 
-  getCurrentPlaylist(){
-    this.musicService.getCurrentUserPlaylists(this.accessToken).subscribe((res:any) => {
+  changeType() {
+    this.artists = [];
+    this.tracks = [];
+    this.playlists = [];
+    this.clickInformation.isClickSearch = false;
+    this.clickInformation.isTypeTrack = false;
+    this.clickInformation.isTypeCurrentList = false;
+    this.keyword = '';
+  }
+
+  isDisableInput(typeSearch: string) {
+    if (typeSearch === ('Choose Search Type') || (typeSearch === 'Current User Playlists'))
+      return true;
+    return false;
+  }
+
+  getCurrentPlaylist() {
+    this.musicService.getCurrentUserPlaylists(this.accessToken).subscribe((res: any) => {
+      this.isLoading = false;
       this.playlists = res.items;
-    })
+    },
+      (error) => {
+        this.isLoading = false;
+        if ((error.status = 401)) {
+          this.tokenExprise = true;
+        }
+      }
+    )
 
   }
 

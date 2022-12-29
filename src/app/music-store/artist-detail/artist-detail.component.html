@@ -15,7 +15,7 @@
         </p>
     </div>
  
-    <div *ngIf="artistsList && artistsList.length == 0" style="text-align: center;">
+    <div *ngIf="clickInformation.isClickSearch && !clickInformation.isTypeTrack && !clickInformation.isTypeCurrentList && artistsList && artistsList.length == 0" style="text-align: center;">
         <h5 style="color: red;">No Data For Your Search.Pls Search Again</h5>
     </div>
  

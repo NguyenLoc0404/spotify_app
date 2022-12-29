@@ -9,13 +9,15 @@ export class ArtistDetailComponent implements OnInit {
   @Input() artists: any;
   @Input() tracks: any;
   @Input() accessToken: any;
+  @Input() clickInformation: any;
   artistsList: any;
   token: any;
   topTrack: any;
   indexOfArtist : number = -1;
   constructor(private musicService: MusicService) {}
  
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
  
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['artists'] && changes['artists'].currentValue) {
@@ -27,7 +29,7 @@ export class ArtistDetailComponent implements OnInit {
       const token = changes['accessToken'].currentValue;
       this.token = token;
     }
-
+ 
     if (changes['tracks'] && changes['tracks'].currentValue) {
       const change = changes['tracks'].currentValue;
       this.topTrack = change;

@@ -1,14 +1,18 @@
-<div  class="container" style="text-align: center">
+<div class="container" style="text-align: center">
     <h4>Music Store</h4>
-    <div class="row">
-        <div class="col-3"></div>
-        <input [(ngModel)]="keyword" type="text" class="col-6" placeholder="Input Your Artist" aria-label="keyword"
-            aria-describedby="basic-addon1" />
-        <div class="col-2" style="text-align: left;">
-            <!-- <button  [disabled]="!accessToken"  type="button" class="btn btn-success" (click)="searchMusic('artist')">Search artist</button> -->
-            <!-- <button  [disabled]="!accessToken"  type="button" class="btn btn-success" (click)="searchMusic('track')">Search track</button> -->
-            <button  [disabled]="!accessToken"  type="button" class="btn btn-success" (click)="getCurrentPlaylist()">getCurrentUserPlaylists</button>
-            <button *ngIf="!accessToken || tokenExprise"   type="button" class="btn btn-warning" (click)="getNewToken()" style="margin-left: 3%;">Get Token</button>
+    <div style="width: 60%; margin: 0 auto;">
+        <div class="input-group">
+            <select class="custom-select" [(ngModel)]="selectedTypeSearch" (click)="changeType()">
+                <option *ngFor="let o of options">{{o.name}}</option>
+            </select>
+            <input type="text" [(ngModel)]="keyword" class="form-control" aria-label="Text input with dropdown button"
+                placeholder="Input Your Artist" [disabled]="isDisableInput(selectedTypeSearch)">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary"  (click)="searchMusic()"
+                    [disabled]="selectedTypeSearch === 'Choose Search Type'" type="submit">Search</button>
+                <button *ngIf="!accessToken || tokenExprise" class="btn btn-outline-secondary" type="button"
+                    (click)="getNewToken()">Get Token</button>
+            </div>
         </div>
     </div>
     <div *ngIf="!accessToken" style="text-align: center;margin-top: 2%;">
@@ -21,6 +25,18 @@
             The token expired. Pls click Get Token
         </p>
     </div>
-    <app-artist-detail *ngIf="!tokenExprise" [tracks]="tracks" [artists]="artists" [accessToken]='accessToken' ></app-artist-detail>
-    <app-playlists *ngIf="!tokenExprise" [playlists]="playlists" [accessToken]='accessToken'></app-playlists>
+
+    <div *ngIf="!isLoading">
+        <app-artist-detail *ngIf="!tokenExprise" [tracks]="tracks" [artists]="artists"
+            [accessToken]='accessToken' [clickInformation]="clickInformation"></app-artist-detail>
+        <app-playlists *ngIf="!tokenExprise" [playlists]="playlists" [accessToken]='accessToken'
+            [clickInformation]="clickInformation"></app-playlists>
+    </div>
+
+
+</div>
+<div class="d-flex justify-content-center" *ngIf="isLoading">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
 </div>
