@@ -34,7 +34,6 @@ export class ArtistDetailComponent implements OnInit {
       const change = changes['tracks'].currentValue;
       this.topTrack = change;
     }
-    
  
     if (this.artistsList)
       this.artistsList.map((ele: { display: boolean; }) => {

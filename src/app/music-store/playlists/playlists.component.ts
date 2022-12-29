@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { MusicService } from '../Service/music-service.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { MusicService } from '../Service/music-service.service';
   templateUrl: './playlists.component.html',
   styleUrls: ['./playlists.component.scss']
 })
-export class PlaylistsComponent {
+export class PlaylistsComponent implements OnInit {
   @Input() playlists: any;
   @Input() accessToken: any;
   @Input() clickInformation: any;
@@ -16,12 +16,15 @@ export class PlaylistsComponent {
   tracksList: any;
   constructor(private musicService: MusicService) {}
 
+  ngOnInit(): void {    
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['playlists'] && changes['playlists'].currentValue) {
       const change = changes['playlists'].currentValue;
       this.playList = change;
     }
-
+   
     if (changes['accessToken'] && changes['accessToken'].currentValue) {
       const token = changes['accessToken'].currentValue;
       this.token = token;

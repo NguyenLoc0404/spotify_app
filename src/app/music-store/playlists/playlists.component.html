@@ -10,10 +10,10 @@
         </p>
     </div>
  
-    <div *ngIf="clickInformation.isClickSearch && playList && playList.length == 0" style="text-align: center;">
+    <div *ngIf="clickInformation.isClickSearch && clickInformation.isTypeCurrentList && playList && playList.length == 0" style="text-align: center;">
         <h5 style="color: red;">No Data For Your Current Playlist</h5>
     </div>
  
 </div>
 
-<app-track-detail [tracksList]="tracksList" [playlists]='playlists' [indexOfPlaylist]='indexOfPlaylist'></app-track-detail>
+<app-track-detail *ngIf="playlists.length > 0" [tracksList]="tracksList" [playlists]='playlists' [indexOfPlaylist]='indexOfPlaylist'></app-track-detail>
