@@ -1,23 +1,17 @@
-<div class="container" >
-    <button *ngIf="tracks && tracks.length > 0 &&( (artistsList && artistsList.length > 0)||(tracksList && tracksList.length > 0))" class="btn btn-warning" style="margin-bottom: 2%;" (click)="backList()">Back</button>
-    <div class="row" *ngFor="let item of tracks">
-        <div class="col-3">
- 
-        </div>
-        <div class="col-3">
-            <img src="{{item.album && item.album.images[1] && item.album.images[1].url}}" alt="link erro"
-                style="width: 200px;height: 200px;">
-            <h5 style="font-weight: bold;color: #1855ff;margin-top: 2%;margin-bottom: 0;">{{item.name}}</h5>
-            <p style="margin-bottom: 0;font-weight: 600;"> <span
-                    style="font-weight: 700;color: red;font-size: 20px;">type: </span>
-                {{item.type}}
-            </p>
-        </div>
-        <div class="col-6">
-            <audio controls style="float: left;">
-                <source src="{{item.preview_url}}" type="audio/ogg">
-            </audio>
- 
+<button *ngIf="tracks && tracks.length > 0 &&( (artistsList && artistsList.length > 0)||(tracksList && tracksList.length > 0))" class="btn btn-warning" style="margin-bottom: 2%;" (click)="backList()">Back</button>
+<div class="container row">
+    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let item of tracks" style="margin-bottom: 10px;">
+        <div class="card" style="width: 13rem;">
+            <img class="card-img-top" src="{{item.album && item.album.images[1] && item.album.images[1].url}}"
+                alt="link erro">
+            <div class="card-body">
+                <p class="card-title" style="font-weight: bold;color: #1855ff;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;margin-bottom: 0;">{{item.name}}</p>
+                <p class="card-text" style="margin-bottom: 10px;">Type: {{item.type}}</p>
+                <audio controls style="width: 100%;margin-bottom: 10px;">
+                    <source src="{{item.preview_url}}" type="audio/ogg">
+                </audio>
+                <a href='{{item.external_urls.spotify}}' class="btn btn-primary">Go to Spotify</a>
+            </div>
         </div>
     </div>
 </div>

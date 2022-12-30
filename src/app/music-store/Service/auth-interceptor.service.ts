@@ -14,7 +14,6 @@ export class AuthInterceptorService implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log('request',request);
     return next.handle(request).pipe(      
       catchError((err) => {
         if (err instanceof HttpErrorResponse) {

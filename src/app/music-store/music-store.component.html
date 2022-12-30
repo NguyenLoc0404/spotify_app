@@ -1,26 +1,25 @@
 <div class="container" style="text-align: center">
-    <h4>Music Store</h4>
-    <div style="width: 80%; margin: 0 auto;">
+    <h1 >Music Store</h1>
+    <div style="width: 90%; margin: 0 auto;">
         <div class="row">
-            <div class="col-3" style="display: contents;">
-                <select [(ngModel)]="selectedTypeSearch" (change)="changeType()" style="border-radius: 8px;">
+            <div  style="display: contents;">
+                <select class="select-reponsive" [(ngModel)]="selectedTypeSearch" (change)="changeType()" style="border-radius: 8px;">
                     <option *ngFor="let o of options">{{o.name}}</option>
                 </select>
             </div>
-            <form class="col-7" [formGroup]="contactForm">
+            <form class="form-reponsive col-12 col-sm-6 col-md-5 col-lg-7" [formGroup]="contactForm">
                 <input [appHighlight]="returnColor(contactForm.get('name'))" type="text" class="form-control" id="name"
                     placeholder="Typing Your Characters To Search" formControlName="name" />
             </form>
-            <div class="col-2" style="display: contents;">
-                <button class="btn btn-outline-secondary" (click)="searchMusic()" [disabled]="isDiableSearchButton()"
+            <div class="col-12 col-sm-2 col-md-3 col-lg-3" style="display: contents;">
+                <button class="button-reponsive btn btn-success" (click)="searchMusic()" [disabled]="isDiableSearchButton()"
                     type="submit" style="margin-right: 12px;">Search</button>
-                <button  *ngIf="!accessToken || tokenExprise" class="btn btn-outline-secondary" type="button"
-                    (click)="getNewToken()">Get Token</button>
+                <button *ngIf="!accessToken || tokenExprise" class="btn btn-warning" type="button" (click)="getNewToken()">Get Token</button>
             </div>
         </div>
 
         <div *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched"
-            style="text-align: left;display: contents;color: red;">
+            style="display: contents;color: red;">
 
             <div *ngIf="contactForm.get('name')?.errors?.['required']">
                 Name is required.

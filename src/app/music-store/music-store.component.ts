@@ -164,7 +164,3 @@ export class MusicStoreComponent implements OnInit {
 
 
 }
-
-interface Post {
-  content: string;
-}

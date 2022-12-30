@@ -1,5 +1,5 @@
 <div class="row" style="margin-top: 2%;justify-content: center;">
-    <div class="col-3"  *ngFor="let item of artistsList; let i=index" style="margin-bottom: 2%;"
+    <div class="artist-reponsive"  *ngFor="let item of artistsList; let i=index" style="margin-bottom: 2%;"
         [ngStyle]="{ display: item.display ? 'block': 'none'}" (click)='viewTopTrack(item,i)'>
         <img src="{{item.images[1] && item.images[1].url}}" alt="link erro"
             style="border-radius: 50%;width: 300px;height: 300px;">
