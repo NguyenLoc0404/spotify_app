@@ -1,4 +1,5 @@
 import { Component,Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { TOPTRACK, TRACKSLIST } from 'src/assets/constans';
 import { MusicService } from '../../Service/music-service.service';
  
 @Component({
@@ -23,13 +24,13 @@ export class TrackDetailComponent implements OnInit {
   }
  
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['topTrack'] && changes['topTrack'].currentValue) {
-      const change = changes['topTrack'].currentValue;
+    if (changes[TOPTRACK] && changes[TOPTRACK].currentValue) {
+      const change = changes[TOPTRACK].currentValue;
       this.tracks = change;
     }
 
-    if (changes['tracksList'] && changes['tracksList'].currentValue) {
-      const change = changes['tracksList'].currentValue;
+    if (changes[TRACKSLIST] && changes[TRACKSLIST].currentValue) {
+      const change = changes[TRACKSLIST].currentValue;
       this.tracks = change;
       this.tracks = this.tracks.map((ele: any) => ele.track);
     }

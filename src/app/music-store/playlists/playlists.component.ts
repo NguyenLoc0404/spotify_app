@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { ACCESSTOKEN, PLAYLISTS } from 'src/assets/constans';
 import { MusicService } from '../Service/music-service.service';
 
 @Component({
@@ -20,13 +21,13 @@ export class PlaylistsComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['playlists'] && changes['playlists'].currentValue) {
-      const change = changes['playlists'].currentValue;
+    if (changes[PLAYLISTS] && changes[PLAYLISTS].currentValue) {
+      const change = changes[PLAYLISTS].currentValue;
       this.playList = change;
     }
 
-    if (changes['accessToken'] && changes['accessToken'].currentValue) {
-      const token = changes['accessToken'].currentValue;
+    if (changes[ACCESSTOKEN] && changes[ACCESSTOKEN].currentValue) {
+      const token = changes[ACCESSTOKEN].currentValue;
       this.token = token;
     }
 

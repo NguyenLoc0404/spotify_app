@@ -1,16 +1,51 @@
+.search-box {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.search-box__container {
+    display: contents;
+}
+
+.search-box__container__select {
+    border-radius: 8px;
+}
+
+.display-content {
+    display: contents;
+}
+
+.margin-r-12 {
+    margin-right: 12px;
+}
+
+.color-red {
+    color: red;
+}
+
+.error-validation-container {
+    display: contents;
+    color: red;
+}
+
+.token-container {
+    text-align: center;
+    margin-top: 2%;
+}
+
 @media only screen and (max-width: 767px) {
     .button-reponsive {
         margin-top: 10px;
     }
 }
 
-
 @media only screen and (max-width: 575px) {
     .form-reponsive {
         margin-top: 10px;
         padding-left: 0px;
     }
-    .select-reponsive{
+
+    .select-reponsive {
         height: 38px;
     }
 }

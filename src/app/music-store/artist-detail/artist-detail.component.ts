@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { ACCESSTOKEN, ARTISTS, TRACKS } from 'src/assets/constans';
 import { MusicService } from '../Service/music-service.service';
 @Component({
   selector: 'app-artist-detail',
@@ -20,18 +21,18 @@ export class ArtistDetailComponent implements OnInit {
   }
  
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['artists'] && changes['artists'].currentValue) {
-      const change = changes['artists'].currentValue;
+    if (changes[ARTISTS] && changes[ARTISTS].currentValue) {
+      const change = changes[ARTISTS].currentValue;
       this.artistsList = change;
     }
 
-    if (changes['accessToken'] && changes['accessToken'].currentValue) {
-      const token = changes['accessToken'].currentValue;
+    if (changes[ACCESSTOKEN] && changes[ACCESSTOKEN].currentValue) {
+      const token = changes[ACCESSTOKEN].currentValue;
       this.token = token;
     }
  
-    if (changes['tracks'] && changes['tracks'].currentValue) {
-      const change = changes['tracks'].currentValue;
+    if (changes[TRACKS] && changes[TRACKS].currentValue) {
+      const change = changes[TRACKS].currentValue;
       this.topTrack = change;
     }
  
