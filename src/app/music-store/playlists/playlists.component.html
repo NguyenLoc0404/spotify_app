@@ -16,4 +16,4 @@
  
 </div>
 
-<app-track-detail *ngIf="playlists.length > 0" [tracksList]="tracksList" [playlists]='playlists' [indexOfPlaylist]='indexOfPlaylist'></app-track-detail>
+<app-track-detail *ngIf="playlists && playlists.length > 0" [tracksList]="tracksList" [playlists]='playlists' [indexOfPlaylist]='indexOfPlaylist'></app-track-detail>

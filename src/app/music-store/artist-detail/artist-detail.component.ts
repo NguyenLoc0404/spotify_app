@@ -64,7 +64,7 @@ export class ArtistDetailComponent implements OnInit {
       },
       (error) => {
         if(error.status = 401){
-            alert('123');
+          sessionStorage.clear();;
         }
       });
   }

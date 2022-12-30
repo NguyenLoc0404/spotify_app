@@ -2,24 +2,44 @@
     <h4>Music Store</h4>
     <div style="width: 60%; margin: 0 auto;">
         <div class="input-group">
-            <select class="custom-select" [(ngModel)]="selectedTypeSearch" (click)="changeType()">
+            <select class="custom-select" [(ngModel)]="selectedTypeSearch" (change)="changeType()">
                 <option *ngFor="let o of options">{{o.name}}</option>
             </select>
-            <input type="text" [(ngModel)]="keyword" class="form-control" aria-label="Text input with dropdown button"
-                placeholder="Input Your Artist" [disabled]="isDisableInput(selectedTypeSearch)">
+            <form style="text-align: end" [formGroup]="contactForm">
+                <div class="form-group row" style="margin: 2% 0">
+                    <div class="col-sm-10">
+                        <input [appHighlight]="returnColor(contactForm.get('name'))" type="text" class="form-control"
+                            id="name" placeholder="Typing Your Characters To Search" formControlName="name" />
+                    </div>
+                </div>
+            </form>
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary"  (click)="searchMusic()"
-                    [disabled]="selectedTypeSearch === 'Choose Search Type'" type="submit">Search</button>
+                <button class="btn btn-outline-secondary" (click)="searchMusic()" [disabled]="isDiableSearchButton()"
+                    type="submit">Search</button>
                 <button *ngIf="!accessToken || tokenExprise" class="btn btn-outline-secondary" type="button"
                     (click)="getNewToken()">Get Token</button>
             </div>
         </div>
+
+        <div *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched"
+            style="text-align: left;display: contents;color: red;">
+
+            <div *ngIf="contactForm.get('name')?.errors?.['required']">
+                Name is required.
+            </div>
+            <div *ngIf="contactForm.get('name')?.errors?.['minlength']">
+                Name must be at least 2 characters .
+            </div>
+        </div>
+
     </div>
+
     <div *ngIf="!accessToken" style="text-align: center;margin-top: 2%;">
         <p style="color: red;">
             Dont have Token. Pls click Get Token
         </p>
     </div>
+
     <div *ngIf="tokenExprise" style="text-align: center;margin-top: 2%;">
         <p style="color: red;">
             The token expired. Pls click Get Token
@@ -27,14 +47,13 @@
     </div>
 
     <div *ngIf="!isLoading">
-        <app-artist-detail *ngIf="!tokenExprise" [tracks]="tracks" [artists]="artists"
-            [accessToken]='accessToken' [clickInformation]="clickInformation"></app-artist-detail>
+        <app-artist-detail *ngIf="!tokenExprise" [tracks]="tracks" [artists]="artists" [accessToken]='accessToken'
+            [clickInformation]="clickInformation"></app-artist-detail>
         <app-playlists *ngIf="!tokenExprise" [playlists]="playlists" [accessToken]='accessToken'
             [clickInformation]="clickInformation"></app-playlists>
     </div>
-
-
 </div>
+
 <div class="d-flex justify-content-center" *ngIf="isLoading">
     <div class="spinner-border" role="status">
         <span class="sr-only">Loading...</span>
