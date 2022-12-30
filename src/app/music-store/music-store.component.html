@@ -24,10 +24,10 @@
             *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched">
 
             <div *ngIf="contactForm.get('name')?.errors?.['required']">
-                Name is required.
+                KeyWord is required.
             </div>
             <div *ngIf="contactForm.get('name')?.errors?.['minlength']">
-                Name must be at least 2 characters .
+                KeyWord must be at least 2 characters .
             </div>
         </div>
 
