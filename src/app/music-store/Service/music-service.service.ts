@@ -5,9 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class MusicService {
-
   constructor(private http: HttpClient) {}
-
   searchMusic(q: string, accessToken: string, type: string) {
     const url = 'https://api.spotify.com/v1/search';
     const limit = 10;
@@ -75,6 +73,19 @@ export class MusicService {
     );
   }
 
+  generateAccessToken() {
+    const client_id = '61a99f3e8dda4664beff04e1ca223ccb';
+    const client_secret = '9e5333c3d4b64c2abfb86f814459e5be';
+    const authorizationTokenUrl = `https://accounts.spotify.com/api/token`;
+    const body = 'grant_type=client_credentials';
+    return this.http.post(authorizationTokenUrl, body, {
+      headers: new HttpHeaders({
+        Authorization:
+          'Basic  ' + btoa(client_id + ':' + client_secret),
+        'Content-Type': 'application/x-www-form-urlencoded;',
+      }),
+    });
+  }
 
   generateNewToken() {
     const urlGetAccesToken = 'https://accounts.spotify.com/authorize?';
@@ -92,7 +103,7 @@ export class MusicService {
       'redirect_uri=' +
       `${redirect_uri}&` +
       'scope=' +
-      scope;
+      `${scope}&` + 'response_type=token' ;
     return finalUrlGetToken;
   }
 }

@@ -1,22 +1,20 @@
 <div class="container" style="text-align: center">
     <h4>Music Store</h4>
-    <div style="width: 60%; margin: 0 auto;">
-        <div class="input-group">
-            <select class="custom-select" [(ngModel)]="selectedTypeSearch" (change)="changeType()">
-                <option *ngFor="let o of options">{{o.name}}</option>
-            </select>
-            <form style="text-align: end" [formGroup]="contactForm">
-                <div class="form-group row" style="margin: 2% 0">
-                    <div class="col-sm-10">
-                        <input [appHighlight]="returnColor(contactForm.get('name'))" type="text" class="form-control"
-                            id="name" placeholder="Typing Your Characters To Search" formControlName="name" />
-                    </div>
-                </div>
+    <div style="width: 80%; margin: 0 auto;">
+        <div class="row">
+            <div class="col-3" style="display: contents;">
+                <select [(ngModel)]="selectedTypeSearch" (change)="changeType()" style="border-radius: 8px;">
+                    <option *ngFor="let o of options">{{o.name}}</option>
+                </select>
+            </div>
+            <form class="col-7" [formGroup]="contactForm">
+                <input [appHighlight]="returnColor(contactForm.get('name'))" type="text" class="form-control" id="name"
+                    placeholder="Typing Your Characters To Search" formControlName="name" />
             </form>
-            <div class="input-group-append">
+            <div class="col-2" style="display: contents;">
                 <button class="btn btn-outline-secondary" (click)="searchMusic()" [disabled]="isDiableSearchButton()"
-                    type="submit">Search</button>
-                <button *ngIf="!accessToken || tokenExprise" class="btn btn-outline-secondary" type="button"
+                    type="submit" style="margin-right: 12px;">Search</button>
+                <button  *ngIf="!accessToken || tokenExprise" class="btn btn-outline-secondary" type="button"
                     (click)="getNewToken()">Get Token</button>
             </div>
         </div>
