@@ -1,29 +1,77 @@
+.artist-container {
+  margin-top: 2%;
+  justify-content: center;
+}
+
+.color-red {
+  color: red;
+}
+
+.image-artist {
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+}
+
+.title {
+  font-weight: bold;
+  color: #1855ff;
+  margin-top: 2%;
+  margin-bottom: 0;
+}
+
+.popularity-content {
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+.popularity-content__span {
+  font-weight: 700;
+  color: red;
+  font-size: 20px;
+}
+
+.genres-content {
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+.genres-content__span {
+  font-weight: 700;
+  color: #4caf50;
+  font-size: 20px;
+}
+
+.margin-b-2 {
+  margin-bottom: 2%;
+}
+
 @media screen and (max-width: 1399px) and (min-width: 1200px) {
-    .artist-reponsive {
-        width: 33.33%
-    }
+  .artist-reponsive {
+    width: 33.33%
   }
+}
 
-  @media screen and (max-width: 1199px)  {
-    .artist-reponsive {
-        width: 41.66%;
-    }
+@media screen and (max-width: 1199px) {
+  .artist-reponsive {
+    width: 41.66%;
   }
+}
 
-  @media screen and (max-width: 991px)  {
-    .artist-reponsive {
-        width: 50%;
-    }
+@media screen and (max-width: 991px) {
+  .artist-reponsive {
+    width: 50%;
   }
+}
 
-  @media screen and (max-width: 767px)  {
-    .artist-reponsive {
-        width: 100%;
-    }
+@media screen and (max-width: 767px) {
+  .artist-reponsive {
+    width: 100%;
   }
+}
 
-  @media screen and (min-width: 1400px)  {
-    .artist-reponsive {
-        width: 25%;
-    }
+@media screen and (min-width: 1400px) {
+  .artist-reponsive {
+    width: 25%;
   }
+}

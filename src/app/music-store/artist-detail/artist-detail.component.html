@@ -1,24 +1,22 @@
-<div class="row" style="margin-top: 2%;justify-content: center;">
-    <div class="artist-reponsive"  *ngFor="let item of artistsList; let i=index" style="margin-bottom: 2%;"
+<div class="row artist-container">
+    <div class="artist-reponsive margin-b-2" *ngFor="let item of artistsList; let i=index"
         [ngStyle]="{ display: item.display ? 'block': 'none'}" (click)='viewTopTrack(item,i)'>
-        <img src="{{item.images[1] && item.images[1].url}}" alt="link erro"
-            style="border-radius: 50%;width: 300px;height: 300px;">
-        <h5 style="font-weight: bold;color: #1855ff;margin-top: 2%;margin-bottom: 0;">{{item.name}}</h5>
-        <p style="margin-bottom: 0;font-weight: 600;"> <span
-                style="font-weight: 700;color: red;font-size: 20px;">Popularity: </span>
+        <img class="image-artist" src="{{item.images[1] && item.images[1].url}}" alt="link erro">
+        <h5 class="title">{{item.name}}</h5>
+        <p class="popularity-content"> <span class="popularity-content__span">Popularity: </span>
             {{item.popularity}}
         </p>
- 
-        <p style="margin-bottom: 0;font-weight: 600;"> <span
-                style="font-weight: 700;color: #4caf50;font-size: 20px;">Genres: </span>
+
+        <p class="genres-content"> <span class="genres-content__span">Genres: </span>
             {{returnGenres(item.genres)}}
         </p>
     </div>
- 
-    <div *ngIf="clickInformation.isClickSearch && !clickInformation.isTypeTrack && !clickInformation.isTypeCurrentList && artistsList && artistsList.length == 0" style="text-align: center;">
-        <h5 style="color: red;">No Data For Your Search.Pls Search Again</h5>
+
+    <div *ngIf="clickInformation.isClickSearch && !clickInformation.isTypeTrack && !clickInformation.isTypeCurrentList && artistsList && artistsList.length == 0"
+        style="text-align: center;">
+        <h5 class="color-red">No Data For Your Search.Please Search Again!</h5>
     </div>
- 
+
 </div>
- 
+
 <app-track-detail [topTrack]="topTrack" [artistsList]='artistsList' [index]='indexOfArtist'></app-track-detail>
